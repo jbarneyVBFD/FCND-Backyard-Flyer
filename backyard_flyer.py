@@ -97,16 +97,16 @@ class BackyardFlyer(Drone):
         """
         if self.target_position == np.array( [ 0.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 0.0, 5.0 ] )
-            self.all_waypoints.append( return np.array( [ 10.0, 0.0, 5.0 ] ) )
+            self.all_waypoints.append( np.array( [ 10.0, 0.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 10.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 10.0, 5.0 ] )
-            self.all_waypoints.append( return np.array( [ 10.0, 10.0, 5.0 ] ) )
+            self.all_waypoints.append( np.array( [ 10.0, 10.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 10.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 10.0, 5.0 ] )
-            self.all_waypoints.append( return np.array( [ 0.0, 10.0, 5.0 ] ) )
+            self.all_waypoints.append( np.array( [ 0.0, 10.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 0.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 0.0, 5.0 ] )
-            self.all_waypoints.append( return np.array( [ 0.0, 0.0, 5.0 ] ) )
+            self.all_waypoints.append( np.array( [ 0.0, 0.0, 5.0 ] ) )
 
     def arming_transition(self):
         """TODO: Fill out this method
