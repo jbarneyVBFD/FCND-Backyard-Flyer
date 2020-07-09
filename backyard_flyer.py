@@ -139,7 +139,7 @@ class BackyardFlyer(Drone):
         for i in range( len( self.all_waypoints ) ):
             print("waypoint transition")
             self.target_position = self.all_waypoints[i]
-            print( "target_position: [%(target)]" % {'target': self.target_position } )
+            print( "target position: ", self.target_position )
             self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], radians )
             radians += .05
 
