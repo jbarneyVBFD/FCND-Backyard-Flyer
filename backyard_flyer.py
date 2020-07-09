@@ -148,7 +148,7 @@ class BackyardFlyer(Drone):
         """
         radians = 0
         target = self.calculate_box
-        self.target_position = target
+        self.target_position = [target[0], target[1], target[3]]
         self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[3], radians )
         self.flight_state = States.WAYPOINT
         print("waypoint transition")
