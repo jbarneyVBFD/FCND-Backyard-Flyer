@@ -132,11 +132,11 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
-        self.all_waypoints = self.calculate_box()
+        #self.all_waypoints = self.calculate_box()
         i = 0
         radians = 0
         self.flight_state = States.WAYPOINT
-        for i in len( self.all_waypoints ):
+        for i in len( range( self.all_waypoints ) ):
             print("waypoint transition")
             self.target_position = self.all_waypoints[i]
             print( "target_position: [ %(0), %(1), %(2) ]" % {'0': target_position[0], '1': target_position[1], '2': target_position[2] } )
