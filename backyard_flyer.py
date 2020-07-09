@@ -53,7 +53,7 @@ class BackyardFlyer(Drone):
         if self.flight_state == States.WAYPOINT:
 
             longitude = 1.0 * self.local_position[0]
-            latitude = -1.0 * self.local_position[1]
+            latitude = 1.0 * self.local_position[1]
 
             i = 0
             radians = 0
