@@ -95,13 +95,13 @@ class BackyardFlyer(Drone):
 
         1. Return waypoints to fly a box
         """
-        if self.target_position = np.array( [ 0.0, 0.0, 5.0 ] ):
+        if self.target_position == np.array( [ 0.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 0.0, 5.0 ] )
-        elif self.target_position = np.array( [ 10.0, 0.0, 5.0 ] ):
+        elif self.target_position == np.array( [ 10.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 10.0, 5.0 ] )
-        elif self.target_position = np.array( [ 10.0, 10.0, 5.0 ] ):
+        elif self.target_position == np.array( [ 10.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 10.0, 5.0 ] )
-        elif self.target_position = np.array( [ 0.0, 10.0, 5.0 ] ):
+        elif self.target_position == np.array( [ 0.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 0.0, 5.0 ] )
 
     def arming_transition(self):
