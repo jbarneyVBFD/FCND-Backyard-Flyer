@@ -92,8 +92,7 @@ class BackyardFlyer(Drone):
 
         1. Return waypoints to fly a box
         """
-        self.all_waypoints = [ np.array( [ 10.0, 0.0, 5.0 ] ), np.array( [ 10.0, 10.0, 5.0 ] ), np.array( [ 0.0, 10.0, 5.0 ] ), np.array( [ 0.0, 0.0, 5.0 ] ) ]
-        return all_waypoints
+        return [ np.array( [ 10.0, 0.0, 5.0 ] ), np.array( [ 10.0, 10.0, 5.0 ] ), np.array( [ 0.0, 10.0, 5.0 ] ), np.array( [ 0.0, 0.0, 5.0 ] ) ]
 
     def arming_transition(self):
         """TODO: Fill out this method
@@ -133,7 +132,7 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
-        self.calculate_box()
+        self.all_waypoints = self.calculate_box()
         i = 0
         radians = 0
         self.flight_state = States.WAYPOINT
