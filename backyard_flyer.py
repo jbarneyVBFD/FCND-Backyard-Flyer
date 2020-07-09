@@ -23,7 +23,7 @@ class BackyardFlyer(Drone):
     def __init__(self, connection):
         super().__init__(connection)
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.all_waypoints = self.calculate_box()
+        self.all_waypoints = []
         self.in_mission = True
         self.check_state = {}
 
@@ -97,12 +97,16 @@ class BackyardFlyer(Drone):
         """
         if self.target_position == np.array( [ 0.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 0.0, 5.0 ] )
+            self.all_waypoints.append( return np.array( [ 10.0, 0.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 10.0, 0.0, 5.0 ] ):
             return np.array( [ 10.0, 10.0, 5.0 ] )
+            self.all_waypoints.append( return np.array( [ 10.0, 10.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 10.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 10.0, 5.0 ] )
+            self.all_waypoints.append( return np.array( [ 0.0, 10.0, 5.0 ] ) )
         elif self.target_position == np.array( [ 0.0, 10.0, 5.0 ] ):
             return np.array( [ 0.0, 0.0, 5.0 ] )
+            self.all_waypoints.append( return np.array( [ 0.0, 0.0, 5.0 ] ) )
 
     def arming_transition(self):
         """TODO: Fill out this method
