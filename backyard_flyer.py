@@ -23,7 +23,7 @@ class BackyardFlyer(Drone):
     def __init__(self, connection):
         super().__init__(connection)
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.all_waypoints = []
+        self.all_waypoints = self.calculate_box()
         self.in_mission = True
         self.check_state = {}
 
@@ -54,6 +54,12 @@ class BackyardFlyer(Drone):
 
             longitude = self.local_position[0]
             latitude = self.local_position[1]
+
+            for i in range( len( self.all_waypoints ) - 1 ):
+                self.target_position = self.all_waypoints[i]
+                #check if longitude and latitude are within 95% of target
+                if longitude > 0.95 * self.all_waypoints[i][0] and latitude > 0.95 * self.all_waypoints[i][1]:
+                    self.waypoint_transition()
 
 
             #check if longitude and latitude are within 95% of target
@@ -132,16 +138,11 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
-        self.all_waypoints = self.calculate_box()
-        i = 0
         radians = 0
         self.flight_state = States.WAYPOINT
-        for i in range( len( self.all_waypoints ) ):
-            print("waypoint transition")
-            self.target_position = self.all_waypoints[i]
-            print( "target position: ", self.target_position )
-            self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], radians )
-            radians += .05
+        print("waypoint transition")
+        print( "target position: ", self.target_position )
+        self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], radians )
 
     def landing_transition(self):
         """TODO: Fill out this method
