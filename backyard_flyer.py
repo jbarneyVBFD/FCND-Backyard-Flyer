@@ -58,6 +58,7 @@ class BackyardFlyer(Drone):
             i = 0
             for i in range( len( self.all_waypoints ) - 1 ):
                 self.target_position = self.all_waypoints[i]
+                self.waypoint_transition()
                 #check if longitude and latitude are within 95% of target
                 if longitude > 0.95 * self.all_waypoints[i][0] and latitude > 0.95 * self.all_waypoints[i][1]:
                     self.waypoint_transition()
