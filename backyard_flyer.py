@@ -136,7 +136,7 @@ class BackyardFlyer(Drone):
         i = 0
         radians = 0
         self.flight_state = States.WAYPOINT
-        for i in range( self.all_waypoints ):
+        for i in range( len( self.all_waypoints ) ):
             print("waypoint transition")
             self.target_position = self.all_waypoints[i]
             print( "target_position: [ %(0), %(1), %(2) ]" % {'0': target_position[0], '1': target_position[1], '2': target_position[2] } )
