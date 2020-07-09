@@ -55,18 +55,11 @@ class BackyardFlyer(Drone):
             longitude = 1.0 * self.local_position[0]
             latitude = 1.0 * self.local_position[1]
 
-            i = 0
-            radians = 0
-            for i in range( len( self.all_waypoints ) - 1 ):
-                self.target_position = self.all_waypoints[i]
-                self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], radians )
-                radians += 0.05
-                #check if longitude and latitude are within 95% of target
-                if longitude > 0.95 * self.all_waypoints[i][0] and latitude > 0.95 * self.all_waypoints[i][1]:
-                    self.waypoint_transition()
-
-
             #check if longitude and latitude are within 95% of target
+            if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[i][1]:
+                self.waypoint_transition()
+
+
             if longitude > 0.95 * self.all_waypoints[3][0] and latitude > 0.95 * self.all_waypoints[3][1]:
                 self.landing_transition()
 
@@ -102,7 +95,14 @@ class BackyardFlyer(Drone):
 
         1. Return waypoints to fly a box
         """
-        return [ np.array( [ 10.0, 0.0, 5.0 ] ), np.array( [ 10.0, 10.0, 5.0 ] ), np.array( [ 0.0, 10.0, 5.0 ] ), np.array( [ 0.0, 0.0, 5.0 ] ) ]
+        if self.target_position = np.array( [ 0.0, 0.0, 5.0 ] ):
+            return np.array( [ 10.0, 0.0, 5.0 ] )
+        elif self.target_position = np.array( [ 10.0, 0.0, 5.0 ] ):
+            return np.array( [ 10.0, 10.0, 5.0 ] )
+        elif self.target_position = np.array( [ 10.0, 10.0, 5.0 ] ):
+            return np.array( [ 0.0, 10.0, 5.0 ] )
+        elif self.target_position = np.array( [ 0.0, 10.0, 5.0 ] ):
+            return np.array( [ 0.0, 0.0, 5.0 ] )
 
     def arming_transition(self):
         """TODO: Fill out this method
@@ -142,9 +142,14 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
+        radians = 0
+        self.target_position = self.calculate_box()
+        self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[3], radians )
         self.flight_state = States.WAYPOINT
         print("waypoint transition")
         print( "target position: ", self.target_position )
+
+
 
 
     def landing_transition(self):
