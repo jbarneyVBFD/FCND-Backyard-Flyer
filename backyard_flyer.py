@@ -95,16 +95,16 @@ class BackyardFlyer(Drone):
 
         1. Return waypoints to fly a box
         """
-        if self.target_position == np.array( [ 0.0, 0.0, 5.0 ] ):
+        if len( all_waypoints ) == 0:
             return np.array( [ 10.0, 0.0, 5.0 ] )
             self.all_waypoints.append( np.array( [ 10.0, 0.0, 5.0 ] ) )
-        elif self.target_position == np.array( [ 10.0, 0.0, 5.0 ] ):
+        elif len( all_waypoints ) == 1:
             return np.array( [ 10.0, 10.0, 5.0 ] )
             self.all_waypoints.append( np.array( [ 10.0, 10.0, 5.0 ] ) )
-        elif self.target_position == np.array( [ 10.0, 10.0, 5.0 ] ):
+        elif len( all_waypoints ) == 2:
             return np.array( [ 0.0, 10.0, 5.0 ] )
             self.all_waypoints.append( np.array( [ 0.0, 10.0, 5.0 ] ) )
-        elif self.target_position == np.array( [ 0.0, 10.0, 5.0 ] ):
+        elif len( all_waypoints ) == 3:
             return np.array( [ 0.0, 0.0, 5.0 ] )
             self.all_waypoints.append( np.array( [ 0.0, 0.0, 5.0 ] ) )
 
