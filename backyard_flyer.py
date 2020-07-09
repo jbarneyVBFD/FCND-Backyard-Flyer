@@ -57,8 +57,8 @@ class BackyardFlyer(Drone):
 
 
             #check if longitude and latitude are within 95% of target
-            if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[1]:
-                self.waypoint_transition()
+            if longitude > 0.95 * self.all_waypoints[3][0] and latitude > 0.95 * self.all_waypoints[3][1]:
+                self.landing_transition()
 
 
     def velocity_callback(self):
@@ -132,7 +132,7 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
-        #self.all_waypoints = self.calculate_box()
+        self.all_waypoints = self.calculate_box()
         i = 0
         radians = 0
         self.flight_state = States.WAYPOINT
