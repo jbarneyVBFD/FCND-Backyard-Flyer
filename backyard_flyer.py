@@ -61,8 +61,9 @@ class BackyardFlyer(Drone):
 
             #check if lat and long are within 95% of target
             if len( self.all_waypoints ) > 0 :
-                if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[1]:
-                    self.waypoint_transition()
+                if longitude > 0.95 * self.target_position[0]:
+                    if latitude > 0.95 * self.target_position[1]:
+                        self.waypoint_transition()
             else:
                 if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[1]:
                     self.landing_transition()
@@ -105,7 +106,7 @@ class BackyardFlyer(Drone):
     def calculate_radians( self ):
         # returns list of radians to be used in waypoint transition
 
-        return [ 0.0, 0.5, 1.0, 1.5 ]
+        return [ 0.0, 0.66, 1.12, 1.88 ]
 
     def arming_transition(self):
         """TODO: Fill out this method
