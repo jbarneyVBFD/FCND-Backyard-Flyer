@@ -60,7 +60,7 @@ class BackyardFlyer(Drone):
             latitude = self.local_position[1]
 
             #check if lat and long are within 95% of target
-            if len( self.all_waypoints ) > 0 ):
+            if len( self.all_waypoints ) > 0 :
                 if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[1]:
                     self.waypoint_transition()
             else:
