@@ -153,6 +153,7 @@ class BackyardFlyer(Drone):
         print( "target position: ", self.target_position )
 
         self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], self.radian )
+        self.flight_state = States.WAYPOINT
 
 
 
