@@ -60,7 +60,7 @@ class BackyardFlyer(Drone):
             latitude = self.local_position[1]
 
 
-            if np.linalg.norm( self.target_position[ 0:2 ] ) - np.linalg.norm( self.local_position[ 0:2 ] ) < 1:
+            if np.linalg.norm( self.target_position[ 0:2 ] - self.local_position[ 0:2 ] ) < 1:
                     if len( self.all_waypoints ) > 0:
                         self.waypoint_transition()
                     else:
