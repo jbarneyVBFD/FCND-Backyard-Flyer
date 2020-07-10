@@ -23,11 +23,11 @@ class BackyardFlyer(Drone):
     def __init__(self, connection):
         super().__init__(connection)
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.all_waypoints = self.calculate_box()
+        self.all_waypoints = []
         self.in_mission = True
         self.check_state = {}
         self.radian = 0.0
-        self.all_radians = self.calculate_radians()
+        self.all_radians = []
 
         # initial state
         self.flight_state = States.MANUAL
@@ -50,9 +50,11 @@ class BackyardFlyer(Drone):
 
             #check if altitude is wtihin 95% of target
             if altitude > 0.95 * self.target_position[2]:
+                self.all_radians = self.calculate_radians()
+                self.all_waypoints = self.calculate_box()
                 self.waypoint_transition()
 
-        if self.flight_state == States.WAYPOINT:
+        elif self.flight_state == States.WAYPOINT:
 
             longitude = self.local_position[0]
             latitude = self.local_position[1]
