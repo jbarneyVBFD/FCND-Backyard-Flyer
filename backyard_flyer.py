@@ -150,7 +150,7 @@ class BackyardFlyer(Drone):
         self.radian = self.all_radians.pop( 0 )
 
         print( "waypoint transition" )
-        print( "target position: ", target_position )
+        print( "target position: ", self.target_position )
 
         self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], self.radian )
 
