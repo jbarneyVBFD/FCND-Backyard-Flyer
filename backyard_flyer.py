@@ -106,7 +106,7 @@ class BackyardFlyer(Drone):
     def calculate_radians( self ):
         # returns list of radians to be used in waypoint transition
 
-        return [ 0.0, 0.66, 1.12, 1.88 ]
+        return [ 0.0, 0.75, 1.5, 2.25 ]
 
     def arming_transition(self):
         """TODO: Fill out this method
