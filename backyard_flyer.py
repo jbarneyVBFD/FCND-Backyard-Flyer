@@ -23,9 +23,11 @@ class BackyardFlyer(Drone):
     def __init__(self, connection):
         super().__init__(connection)
         self.target_position = np.array([0.0, 0.0, 0.0])
-        self.all_waypoints = []
+        self.all_waypoints = self.calculate_box()
         self.in_mission = True
         self.check_state = {}
+        self.radian = 0.0
+        self.all_radians = self.calculate_radians()
 
         # initial state
         self.flight_state = States.MANUAL
@@ -50,18 +52,19 @@ class BackyardFlyer(Drone):
             if altitude > 0.95 * self.target_position[2]:
                 self.waypoint_transition()
 
-        elif self.flight_state == States.WAYPOINT:
+        if self.flight_state == States.WAYPOINT:
 
-            longitude = 1.0 * self.local_position[0]
-            latitude = 1.0 * self.local_position[1]
+            longitude = self.local_position[0]
+            latitude = self.local_position[1]
 
-            #check if longitude and latitude are within 95% of target
-            if longitude > 0.95 * self.target_position[0] and latitude > 0.95 * self.target_position[1]:
-                self.waypoint_transition()
+            #check if lat and long are within 95% of target
+            if len( self.all_waypoints > 0 ):
+                if longitude > 0.95 * self.target_position[0] and if latitude > 0.95 * self.target_position[1]:
+                    self.waypoint_transition()
+            else:
+                if longitude > 0.95 * self.target_position[0] and if latitude > 0.95 * self.target_position[1]:
+                    self.landing_transition()
 
-
-            if longitude > 0.95 * self.all_waypoints[3][0] and latitude > 0.95 * self.all_waypoints[3][1]:
-                self.landing_transition()
 
 
     def velocity_callback(self):
@@ -95,18 +98,12 @@ class BackyardFlyer(Drone):
 
         1. Return waypoints to fly a box
         """
-        if len( self.all_waypoints ) == 0:
-            return np.array( [ 10.0, 0.0, 5.0 ] )
-            self.all_waypoints.append( np.array( [ 10.0, 0.0, 5.0 ] ) )
-        elif len( self.all_waypoints ) == 1:
-            return np.array( [ 10.0, 10.0, 5.0 ] )
-            self.all_waypoints.append( np.array( [ 10.0, 10.0, 5.0 ] ) )
-        elif len( self.all_waypoints ) == 2:
-            return np.array( [ 0.0, 10.0, 5.0 ] )
-            self.all_waypoints.append( np.array( [ 0.0, 10.0, 5.0 ] ) )
-        elif len( self.all_waypoints ) == 3:
-            return np.array( [ 0.0, 0.0, 5.0 ] )
-            self.all_waypoints.append( np.array( [ 0.0, 0.0, 5.0 ] ) )
+        return [ np.array( [ 10.0, 0.0, 5.0 ] ), np.array( [ 10.0, 10.0, 5.0 ] ), np.array( [ 0.0, 10.0, 5.0 ] ), np.array( [ 0.0, 0.0, 5.0 ] ) ]
+
+    def calculate_radians( self ):
+        # returns list of radians to be used in waypoint transition
+
+        return [ 0.0, 0.5, 1.0, 1.5 ]
 
     def arming_transition(self):
         """TODO: Fill out this method
@@ -146,14 +143,14 @@ class BackyardFlyer(Drone):
         1. Command the next waypoint position
         2. Transition to WAYPOINT state
         """
-        radians = 0
-        target = self.calculate_box
-        self.target_position = [target[0], target[1], target[3]]
-        self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[3], radians )
-        self.flight_state = States.WAYPOINT
-        print("waypoint transition")
-        print( "target position: ", self.target_position )
 
+        self.target_position = self.all_waypoints.pop( [ 0 ] )
+        self.radian = self.all_radians.pop( [0] )
+
+        print( "waypoint transition" )
+        print( "target position: ", target_position )
+        
+        self.cmd_position( self.target_position[0], self.target_position[1], self.target_position[2], self.radian )
 
 
 
